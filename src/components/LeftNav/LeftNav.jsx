@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {Menu} from 'antd';
 import {
   AppstoreOutlined,
@@ -20,8 +20,25 @@ import './LeftNav.less'
 const {SubMenu} = Menu;
 
 
-export default class LeftNav extends Component {
+class LeftNav extends Component {
+  rootSubmenuKeys = ['/products', '/charts']
+
+  state = {
+    openKeys: [''],
+  };
+
+  onOpenChange = openKeys => {
+    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys });
+    } else {
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : [],
+      });
+    }
+  }
   render() {
+    const selectKey = this.props.location.pathname
     return (
       <div className='left-nav'>
         <Link to='/home' className='left-nav-header'>
@@ -30,10 +47,11 @@ export default class LeftNav extends Component {
         </Link>
         <div className='left-nav-link'>
           <Menu
-            defaultSelectedKeys={['/home']}
-            defaultOpenKeys={['sub1']}
+            selectedKeys={[selectKey]}
             mode="inline"
             theme="dark"
+            openKeys={this.state.openKeys}
+            onOpenChange={this.onOpenChange}
           >
             <Menu.Item key="/home">
               <Link to='/home'>
@@ -95,3 +113,5 @@ export default class LeftNav extends Component {
     )
   }
 }
+
+export default withRouter(LeftNav)
