@@ -34,3 +34,6 @@ export const reqWeather = (city) => {
     })
     
   }
+
+// 获取分类列表信息
+export const reqCategorys = () => ajax.get(BASE+'/manage/category/list')
