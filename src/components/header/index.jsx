@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Modal } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-
+import { Modal } from 'antd'
 
 import LinkButton from '../../components/link-button'
 import {reqWeather} from '../../api'
-import { formateDate } from '../../utiles/dateUtils'
+import { formateDate } from '../../utils/dateUtils'
 import menuList from '../../config/menuConfig'
-import MemoryUtiles from '../../utiles/MemoryUtiles'
-import StorageUtiles from '../../utiles/StorageUtiles'
+import memoryUtils from '../../utils/memoryUtils'
+import storageUtils from '../../utils/storageUtils'
 
-import './Header.less'
-const { confirm } = Modal;
+import './index.less'
 
 class Header extends Component {
 
@@ -27,15 +24,13 @@ class Header extends Component {
     退出登陆
   */
   logout = () => {
-    confirm({
+    // 显示确认提示
+    Modal.confirm({
       title: '确认退出吗?',
-      icon: <ExclamationCircleOutlined />,
-      onOk:()=> {
-        // 确定后, 删除存储的用户信息
-        // local中的
-        StorageUtiles.reave()
+      onOk: () => {
+        storageUtils.removeUser()
         // 内存中的
-        MemoryUtiles.user = {}
+        memoryUtils.user = {}
         // 跳转到登陆界面
         this.props.history.replace('/login')
       },
@@ -71,7 +66,9 @@ class Header extends Component {
   获取天气信息显示
   */
   getWeather = async () => {
+    // 发请求
     const { dayPictureUrl, weather } = await reqWeather('郑州')
+    // 更新状态
     this.setState({
       dayPictureUrl, 
       weather
@@ -86,7 +83,6 @@ class Header extends Component {
         currentTime: formateDate(Date.now())
       })
     }, 1000);
-    // 发jsonp请求获取天气信息显示
     this.getWeather()
   }
 
@@ -100,15 +96,14 @@ class Header extends Component {
 
     const { currentTime, dayPictureUrl, weather } = this.state 
 
-    const user = MemoryUtiles.user
+    const user = memoryUtils.user
     // 得到当前需要显示的title
     const title = this.getTitle()
 
     return (
       <div className="header">
         <div className="header-top">
-          欢迎, {user.username} &nbsp;&nbsp;
-
+          欢迎, {user.username}
           <LinkButton onClick={this.logout}>退出</LinkButton>
         </div>
         <div className="header-bottom">

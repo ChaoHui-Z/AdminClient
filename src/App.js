@@ -1,23 +1,22 @@
 import React, {Component} from 'react'
+import { BrowserRouter, Switch, Route} from "react-router-dom"
 
-import {HashRouter, Switch, Route} from "react-router-dom";
-import Login from './pages/login/Login';
-import Admin from './pages/admin/Admin';
+import Login from './pages/login/login.jsx'
+import Admin from './pages/admin/admin.jsx'
 
 /*
 应用根组件
  */
 class App extends Component {
 
-
   render() {
     return (
-      <HashRouter>
-        <Switch>
-          <Route path='/login' component={Login}/>
-          <Route path='/' component={Admin}/>
+      <BrowserRouter>
+        <Switch> 
+          <Route path="/login" component={Login} />
+          <Route path="/" component={Admin} />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     )
   }
 }
