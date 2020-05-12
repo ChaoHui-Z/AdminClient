@@ -59,7 +59,6 @@ class ProductAddUpdate extends Component {
   处理提交的回调
  */
  handleSubmit = (event) => {
-   // 阻止事件的默认行为(提交表单)
    event.preventDefault()
 
    // 进行统一的表单验证
@@ -167,7 +166,6 @@ class ProductAddUpdate extends Component {
             )}
           </Item>
           <Item label="商品图片">
-            {/* 将容器交给需要标记的标签对象, 在解析时就会自动将标签对象保存到容器中(属性名为: current, 属性值标签对象) */}
             <PicturesWall ref={this.pwRef} imgs={product.imgs}/>
           </Item>
           <Item label="商品详情" wrapperCol={{ span: 20 }}>

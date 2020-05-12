@@ -122,9 +122,7 @@ export default class ProductHome extends Component {
     }
     
     if (result.status === 0) {
-      // 取出数据
       const { total, list } = result.data
-      // 更新状态
       this.setState({
         products: list,
         total

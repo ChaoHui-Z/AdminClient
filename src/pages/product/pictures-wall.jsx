@@ -22,14 +22,7 @@ export default class PicturesWall extends React.Component {
   state = {
     previewVisible: false, // 标识是否显示大图预览
     previewImage: '', // 大图的url或者base64值
-    fileList: [
-      /* { // 文件信息对象 file
-        uid: '-1', // 唯一标识
-        name: 'xxx.png', // 文件名
-        status: 'done', // 状态有：uploading done error removed
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png', // 图片的url
-      }, */
-    ],
+    fileList: [],
   }
 
   componentWillMount () {
@@ -39,7 +32,7 @@ export default class PicturesWall extends React.Component {
       const fileList = imgs.map((img, index) => ({
         uid: -index, // 唯一标识
         name: img, // 文件名
-        status: 'done', // 状态有：uploading done error removed
+        status: 'done', 
         url: BASE_IMG + img
       }))
       this.setState({ fileList })
@@ -78,11 +71,8 @@ export default class PicturesWall extends React.Component {
     console.log('handleChange()', file.status, file===fileList[fileList.length-1])
     // 如果上传成功
     if (file.status==='done') {
-      // 将数组最后一个file保存到file变量
       file = fileList[fileList.length - 1]
-      // 取出响应数据中的图片文件名和url
       const {name, url} = file.response.data
-      // 保存到上传的file对象
       file.name = name
       file.url = url
     } else if (file.status==='removed') { // 删除

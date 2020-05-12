@@ -15,8 +15,6 @@ export const reqLogin = (username, password) =>  ajax.post(BASE + '/login', {use
 // 发送jsonp请求得到天气信息
 export const reqWeather = (city) => {
 
-  // 执行器函数: 内部去执行异步任务, 
-  // 成功了调用resolve(), 失败了不调用reject(), 直接提示错误
   return new Promise((resolve, reject) => { 
     const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
     jsonp(url, {}, (error, data) => {
@@ -32,14 +30,9 @@ export const reqWeather = (city) => {
   
 }
 
-// const persons/personList/personArr = [{}, {}]
 
 // 获取分类列表
-// export const reqCategorys = () => ajax.get(BASE + '/manage/category/list')
-/* export const reqCategorys = () => ajax({
-  // method: 'GET',
-  url: BASE + '/manage/category/list'
-}) */
+
 export const reqCategorys = () => ajax(BASE + '/manage/category/list')
 
 // 添加分类
@@ -73,9 +66,8 @@ export const reqSearchProducts = ({
     pageNum,
     pageSize,
     searchName,
-    searchType // 它的值是'productName'或者'productDesc'
+    searchType 
   }) => ajax(BASE + '/manage/product/search', {
-  // method: 'GET',
   params: {
     pageNum,
     pageSize,

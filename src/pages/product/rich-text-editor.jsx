@@ -27,7 +27,7 @@ export default class RichTextEditor extends Component {
 
   uploadImageCallBack = (file) => {
     return new Promise(
-      (resolve, reject) => {// 执行器函数
+      (resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/manage/img/upload');
         xhr.setRequestHeader('Authorization', 'Client-ID XXXXX');

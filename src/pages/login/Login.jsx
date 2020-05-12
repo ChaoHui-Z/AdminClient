@@ -14,7 +14,6 @@ class Login extends Component {
 
 
   handleSubmit = e => {
-    // 阻止事件的默认行为: 阻止表单的提交
     e.preventDefault()
 
     // 对表单所有字段进行统一验证
@@ -126,5 +125,5 @@ class Login extends Component {
 
 const WrapperForm = Form.create()(Login)
 
-export default WrapperForm   // <Form(Login)/>
+export default WrapperForm   
 

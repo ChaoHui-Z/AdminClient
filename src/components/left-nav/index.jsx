@@ -32,13 +32,10 @@ class LeftNav extends Component {
 
   getMenuNodes2 = (menuList) => {
 
-    // 得到当前请求的path
     const path = this.props.location.pathname
 
     return menuList.reduce((pre, item) => {
-      // 判断当前用户是否有此item对应的权限
       if (this.hasAuth(item)) {
-        // 添加<Menu.Item></Menu.Item>
         if (!item.children) {
           pre.push((
             <Menu.Item key={item.key}>
@@ -91,7 +88,6 @@ class LeftNav extends Component {
           </Menu.Item>
         )
       } else {
-        // 如果当前请求路由与当前菜单的某个子菜单的key匹配, 将菜单的key保存为openKey
         if (item.children.find(cItem => path.indexOf(cItem.key) === 0)) {
           this.openKey = item.key
         }

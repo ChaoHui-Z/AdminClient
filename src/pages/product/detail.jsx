@@ -32,9 +32,9 @@ export default class ProductDetail extends Component {
 
   async componentDidMount () {
     let product = this.state.product
-    if (product._id) { // 如果商品有数据, 获取对应的分类
+    if (product._id) { 
       this.getCategory(product.categoryId)
-    } else { // 如果当前product状态没有数据, 根据id参数中请求获取商品并更新
+    } else { 
       const id = this.props.match.params.id
       const result = await reqProduct(id)
       if (result.status === 0) {
@@ -42,7 +42,8 @@ export default class ProductDetail extends Component {
         this.setState({
           product
         })
-        this.getCategory(product.categoryId) // 获取对应的分类
+        // 获取对应的分类
+        this.getCategory(product.categoryId) 
       }
     }
   }

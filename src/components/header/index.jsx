@@ -24,18 +24,15 @@ class Header extends Component {
     退出登陆
   */
   logout = () => {
-    // 显示确认提示
     Modal.confirm({
       title: '确认退出吗?',
       onOk: () => {
         storageUtils.removeUser()
-        // 内存中的
         memoryUtils.user = {}
-        // 跳转到登陆界面
         this.props.history.replace('/login')
       },
       onCancel() {
-        console.log('Cancel');
+        
       },
     })
     
@@ -97,7 +94,7 @@ class Header extends Component {
     const { currentTime, dayPictureUrl, weather } = this.state 
 
     const user = memoryUtils.user
-    // 得到当前需要显示的title
+
     const title = this.getTitle()
 
     return (
